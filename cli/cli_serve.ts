@@ -76,6 +76,8 @@ export async function serve(args: (string | number)[], options: Record<string, u
     redefineGlobalFetchToWorkaroundBareIpAddresses();
 
     const computeScriptContents = async (scriptPathOrModuleWorkerUrl: string, scriptType: 'module' | 'script'): Promise<Uint8Array> => {
+        console.log({ scriptType })
+        
         if (scriptType === 'script') {
             if (scriptPathOrModuleWorkerUrl.startsWith('https://')) throw new Error('Url-based script workers not supported yet');
             return await Deno.readFile(scriptPathOrModuleWorkerUrl);
